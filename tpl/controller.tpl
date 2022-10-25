@@ -1,23 +1,26 @@
 package {{.packageName}}
 
 import (
-	"git.zuoyebang.cc/pkg/golib/v2/base"
-	"github.com/gin-gonic/gin"
-	"hxx-aiclass-course/components"
-	"hxx-aiclass-course/components/dto/dtobigdataschool"
-	"hxx-aiclass-course/service/bigdata"
+	"{{.projectName}}/service/{{.servicePackage}}"
+	"git.zuoyebang.cc/huixuexi/classflow/layer"
+	"github.com/gin-gonic/gin/binding"
 )
 
-func {{.methodName}}(ctx *gin.Context) {
-	var param dtobigdataschool.SchoolCommonReq
-	if err := ctx.ShouldBind(&param); err != nil {
-		base.RenderJsonFail(ctx, components.ErrorParamInvalid)
-		return
-	}
-	res, err := bigdata.NewBigDataSchoolSvc().LearningAnalysis(ctx, &param)
-	if err != nil {
-		base.RenderJsonFail(ctx, err)
-		return
-	}
-	base.RenderJsonSucc(ctx, res)
+type {{.methodName}}Controller struct {
+	layer.Controller
+	dto *{{.servicePackage}}.{{.methodName}}Req
+}
+
+func (entity *{{.methodName}}Controller) GetDtoRequest() interface{} {
+	entity.dto = new({{.servicePackage}}.{{.methodName}}Req)
+	return entity.dto
+}
+
+func (entity *{{.methodName}}Controller) GetBindingType() binding.Binding {
+	return binding.Query
+}
+
+func (entity *{{.methodName}}Controller) Action() (interface{}, error) {
+	svc := entity.Create(new({{.servicePackage}}.{{.methodName}}Service)).(*{{.servicePackage}}.{{.methodName}}Service)
+	return svc.Handle(entity.dto)
 }
