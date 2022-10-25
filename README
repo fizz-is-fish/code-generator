@@ -1,4 +1,7 @@
 v2.0
+1. Edit main.go
+2. Edit tpl
+3. Run
 Have fun!
 
 v1.0
@@ -11,7 +14,7 @@ cd Go-Template/src && go build
 3. Add Go-Template to your binaries or to your PATH
 sudo mv Go-Template /usr/local/bin
 or
-ln -s /Users/xxx/go/src/Go-Template/src/Go-Template /usr/local/bin/got
+ln -s /Users/xxx/go/src/Go-Template/src/Go-Template /usr/local/bin/Go-Template
 
 4. Modify the suffix of the output file
 .generated.txt -> .go
