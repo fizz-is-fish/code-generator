@@ -1,0 +1,31 @@
+v2.0
+Have fun!
+
+v1.0
+1. Download zip archive from github or clone this repository
+git clone https://github.com/phcollignon/Go-Template
+
+2. Build the binary
+cd Go-Template/src && go build
+
+3. Add Go-Template to your binaries or to your PATH
+sudo mv Go-Template /usr/local/bin
+or
+ln -s /Users/xxx/go/src/Go-Template/src/Go-Template /usr/local/bin/got
+
+4. Modify the suffix of the output file
+.generated.txt -> .go
+
+5. Rebuild
+
+example:
+func genController() {
+	ctl := fmt.Sprintf("Go-Template -d controller.json -t  controller.tpl -o %s", controllerPath)
+	c := cmd.NewCommand(ctl)
+	err := c.Execute()
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Println(c.Stdout())
+	fmt.Println(c.Stderr())
+}
